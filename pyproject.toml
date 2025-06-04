@@ -1,6 +1,6 @@
 [project]
 name = "kexporter"
-version = "0.1.3"
+version = "0.1.4"
 description = "Module d'exportation de salons discord en fichier HTML (Discord.py)"
 readme = "README.md"
 authors = [
