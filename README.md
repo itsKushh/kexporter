@@ -3,7 +3,7 @@
 > 🧾 Exportateur de salons ou fils Discord au format HTML, avec rendu fidèle à l'interface Discord.  
 
 ![PyPI](https://img.shields.io/pypi/v/kexporter?style=flat-square&color=0a7cdb)
-![Code Usage](https://img.shields.io/badge/code%20used-90%%25-0a7cdb?style=flat-square)
+![Code Usage](https://img.shields.io/badge/code%20used-90%25-0a7cdb?style=flat-square)
 ![GitHub stars](https://img.shields.io/github/stars/itsKushh/kexporter?style=flat-square&color=0a7cdb)
 ![GitHub forks](https://img.shields.io/github/forks/itsKushh/kexporter?style=flat-square&color=0a7cdb)
 ![Downloads](https://img.shields.io/pypi/dt/kexporter?style=flat-square&color=0a7cdb)
