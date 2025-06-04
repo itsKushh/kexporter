@@ -1,6 +1,6 @@
 [project]
 name = "kexporter"
-version = "0.1.1"
+version = "0.1.2"
 description = "Export Discord channels to HTML, preserving visual layout"
 readme = "README.md"
 authors = [
