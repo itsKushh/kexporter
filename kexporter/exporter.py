@@ -17,18 +17,36 @@ async def get_member_profile_data(member, bot):
             if datetime.now() - timestamp < CACHE_DURATION:
                 return cached_data
 
-        user_data = await bot._state.http.get_user(member.id)
-        
+        # Essayer différentes méthodes pour obtenir les données
+        try:
+            # Méthode 1: Utiliser fetch_user
+            user = await bot.fetch_user(member.id)
+            user_data = {
+                'banner': user.banner.key if user.banner else None,
+                'accent_color': user.accent_color
+            }
+        except:
+            try:
+                # Méthode 2: Utiliser _state.http
+                user_data = await bot._state.http.get_user(member.id)
+            except:
+                # Méthode 3: Utiliser la méthode HTTP directe
+                route = discord.http.Route('GET', '/users/{user_id}', user_id=member.id)
+                user_data = await bot.http.request(route)
+
         banner_url = None
         accent_color = None
 
-        if 'banner' in user_data and user_data['banner']:
+        # Traitement de la bannière
+        if user_data.get('banner'):
             banner_hash = user_data['banner']
-            banner_url = f"https://cdn.discordapp.com/banners/{member.id}/{banner_hash}?size=1024"
+            ext = 'gif' if banner_hash.startswith('a_') else 'png'
+            banner_url = f"https://cdn.discordapp.com/banners/{member.id}/{banner_hash}.{ext}?size=1024"
 
+        # Traitement de la couleur d'accent
         if hasattr(member, 'accent_color') and member.accent_color:
             accent_color = format_color(member.accent_color)
-        elif 'accent_color' in user_data and user_data['accent_color']:
+        elif user_data.get('accent_color'):
             accent_color = format_color(user_data['accent_color'])
         elif isinstance(member, discord.Member) and member.color and member.color.value:
             accent_color = format_color(member.color.value)
