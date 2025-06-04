@@ -17,7 +17,7 @@ async def get_member_profile_data(member, bot):
             if datetime.now() - timestamp < CACHE_DURATION:
                 return cached_data
 
-        user_data = await bot.http.get_user(member.id)
+        user_data = await bot._state.http.get_user(member.id)
         
         banner_url = None
         accent_color = None
@@ -307,7 +307,9 @@ async def export(channel, bot, output_path="export.html", include_attachments=Fa
         message_count=message_count,
         unique_users=unique_users
     )
+    if rendered is None:
+        rendered = ""
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(rendered)
 
-    
+    return rendered
