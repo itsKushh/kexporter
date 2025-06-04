@@ -6,7 +6,6 @@
 ![Python](https://img.shields.io/badge/python-90%25-0a7cdb?style=flat-square)
 ![Stars](https://img.shields.io/github/stars/itsKushh/kexporter?style=flat-square&color=0a7cdb)
 ![Forks](https://img.shields.io/github/forks/itsKushh/kexporter?style=flat-square&color=0a7cdb)
-![Téléchargements](https://img.shields.io/pypi/dt/kexporter?style=flat-square&color=0a7cdb)
 ![Licence](https://img.shields.io/badge/license-GPL--3.0-0a7cdb?style=flat-square)
 ![Problèmes](https://img.shields.io/github/issues/itsKushh/kexporter?style=flat-square&color=0a7cdb)
 
