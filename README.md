@@ -12,7 +12,7 @@
 
 ---
 
-## 🇫🇷 À propos
+## 💙 À propos
 
 `kexporter` est un module Python qui permet d’exporter des messages de salons Discord vers un fichier HTML statique, visuellement proche de l’interface réelle de Discord, retravaillé à ma vision.
 
