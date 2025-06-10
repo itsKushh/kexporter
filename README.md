@@ -1,6 +1,6 @@
 # kexporter
 
-> 🧾 Exportateur de salons ou fils Discord au format HTML, avec rendu fidèle à l'interface Discord.  
+> 🧾 Exportateur de salons Discord au format HTML, tout en gardant le visuel initial (modernisé).  
 
 ![PyPI](https://img.shields.io/pypi/v/kexporter?style=flat-square&color=0a7cdb)
 ![Stars](https://img.shields.io/github/stars/itsKushh/kexporter?style=flat-square&color=0a7cdb)

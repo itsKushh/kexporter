@@ -11,39 +11,33 @@ env = Environment(
 
 async def get_member_profile_data(member, bot):
     try:
+        can_fetch = hasattr(bot, 'http') and hasattr(bot, 'fetch_user')
+        
         cache_key = str(member.id)
         if cache_key in profile_cache:
             cached_data, timestamp = profile_cache[cache_key]
             if datetime.now() - timestamp < CACHE_DURATION:
                 return cached_data
 
-        try:
-            user = await bot.fetch_user(member.id)
-            user_data = {
-                'banner': user.banner.key if user.banner else None,
-                'accent_color': user.accent_color
-            }
-        except:
-            try:
-                user_data = await bot._state.http.get_user(member.id)
-            except:
-                route = discord.http.Route('GET', '/users/{user_id}', user_id=member.id)
-                user_data = await bot.http.request(route)
-
         banner_url = None
         accent_color = None
 
-        if user_data.get('banner'):
-            banner_hash = user_data['banner']
-            ext = 'gif' if banner_hash.startswith('a_') else 'png'
-            banner_url = f"https://cdn.discordapp.com/banners/{member.id}/{banner_hash}.{ext}?size=1024"
-
         if hasattr(member, 'accent_color') and member.accent_color:
             accent_color = format_color(member.accent_color)
-        elif user_data.get('accent_color'):
-            accent_color = format_color(user_data['accent_color'])
         elif isinstance(member, discord.Member) and member.color and member.color.value:
             accent_color = format_color(member.color.value)
+
+        if can_fetch:
+            try:
+                user = await bot.fetch_user(member.id)
+                if user.banner:
+                    banner_hash = user.banner.key
+                    ext = 'gif' if banner_hash.startswith('a_') else 'png'
+                    banner_url = f"https://cdn.discordapp.com/banners/{member.id}/{banner_hash}.{ext}?size=1024"
+                if not accent_color and user.accent_color:
+                    accent_color = format_color(user.accent_color)
+            except:
+                pass
 
         result = (banner_url, accent_color)
         profile_cache[cache_key] = (result, datetime.now())
@@ -51,7 +45,7 @@ async def get_member_profile_data(member, bot):
         return result
 
     except Exception as e:
-        print(f"Error fetching profile data for {member.name}: {e}")
+        print(f"Erreur durant le fetching des données de profil pour {member.name}: {e}")
         return None, None
 
 def get_member_color(member):
